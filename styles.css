@@ -1,0 +1,162 @@
+/* =========================================================
+   Base reset + variables
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root{
+  --bg: #0b1020;
+  --surface: #101935;
+  --text: #e7eefc;
+  --muted: #a9b4d0;
+  --accent: #47c6b7;
+  --border: #1d294d;
+  --shadow: 0 12px 30px rgba(0,0,0,0.25);
+  --radius: 14px;
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1000px 600px at 0% 0%, #0f1a44 0%, #0b1020 55%);
+  min-height: 100dvh;
+  padding: var(--space-3);
+  line-height: 1.55;
+}
+
+/* Light theme (toggled via JS by adding .light to <body>) */
+body.light {
+  --bg: #f6f8fc;
+  --surface: #ffffff;
+  --text: #0d1b2a;
+  --muted: #495057;
+  --accent: #0ea5a4;
+  --border: #e7ecf4;
+  background: linear-gradient(180deg, #f6f8fc, #eef3fb);
+}
+
+.muted { color: var(--muted); }
+.small { font-size: 0.9rem; }
+
+/* =========================================================
+   Layout
+   ========================================================= */
+.site-header, .site-footer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  box-shadow: var(--shadow);
+  max-width: 1100px;
+  margin: 0 auto var(--space-3);
+}
+
+.site-header h1 { margin-bottom: .25rem; font-size: clamp(1.4rem, 3vw, 2rem); }
+.controls { margin-top: var(--space-2); display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+.container {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr; /* CSS Grid for main layout (2D) */
+  gap: var(--space-3);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  box-shadow: var(--shadow);
+}
+
+.site-footer { text-align: center; }
+
+/* =========================================================
+   Forms & Buttons
+   ========================================================= */
+.row {
+  display: flex;             /* Flexbox for one-dimensional layout */
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  flex-wrap: wrap;
+}
+
+input, button {
+  font: inherit;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: .65rem .85rem;
+  background: transparent;
+  color: var(--text);
+}
+
+input::placeholder { color: var(--muted); }
+
+button {
+  background: var(--accent);
+  color: #041016;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(71,198,183,.35);
+  transition: transform .06s ease;
+}
+button:active { transform: translateY(1px); }
+
+/* =========================================================
+   Items list
+   ========================================================= */
+.items {
+  list-style: none;
+  display: grid;                /* Grid to lay out list items neatly */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-2);
+}
+
+.items li {
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: var(--space-2);
+  display: flex;                /* Flex inside each card */
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.02);
+}
+
+.tag {
+  font-size: .85rem;
+  padding: .25rem .5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* Summary panel */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.summary p {
+  padding: .75rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+/* =========================================================
+   Responsive tweaks
+   ========================================================= */
+@media (max-width: 900px) {
+  .container { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 620px) {
+  .container { grid-template-columns: 1fr; }
+  .summary { grid-template-columns: 1fr; }
+}
